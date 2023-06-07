@@ -75,7 +75,7 @@ struct ContentView: View {
     @StateObject var cardViewModel = CardViewModel()
     
     @State private var currentIndex = 0
-    @State private var shuffleIndex = 0
+    @State private var shuffleIndex = 2
     @State private var offset: CGSize = .zero
     @State private var shuffledCards: [Card] = []
     @State private var currentCards: [Card] = []
@@ -113,7 +113,7 @@ struct ContentView: View {
                                                 if currentIndex == currentCards.count {
                                                     currentIndex = 0
                                                 }
-                                                if shuffleIndex == shuffledCards.count {
+                                                if shuffleIndex == shuffledCards.count-1 {
                                                     shuffleIndex = 0
                                                     shuffledCards = cardViewModel.cards.shuffled()
                                                 }
@@ -149,7 +149,7 @@ struct ContentView: View {
     private func updateCurrentCards() {
         currentIndex += 1
         shuffleIndex += 1
-        currentCards.append(shuffledCards[shuffleIndex+2])
+        currentCards.append(shuffledCards[shuffleIndex])
     }
 }
 
