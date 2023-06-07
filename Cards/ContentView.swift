@@ -75,16 +75,17 @@ struct ContentView: View {
     @StateObject var cardViewModel = CardViewModel()
     
     @State private var currentIndex = 0
+    @State private var shuffleIndex = 0
     @State private var offset: CGSize = .zero
     @State private var shuffledCards: [Card] = []
+    @State private var currentCards: [Card] = []
     @State private var flippedCardIndices: Set<Int> = []
-
     var body: some View {
         
         ZStack {
-            ForEach(shuffledCards.indices.reversed(), id: \.self) { index in
+            ForEach(currentCards.indices.reversed(), id: \.self) { index in
                 if index >= currentIndex {
-                    CardView(card: shuffledCards[index], isFlipped: flippedCardIndices.contains(index), swipeProgress: index == currentIndex ? offset.width : 0)
+                    CardView(card: currentCards[index], isFlipped: flippedCardIndices.contains(index), swipeProgress: index == currentIndex ? offset.width : 0)
                         .offset(index == currentIndex ? offset : .zero)
                         .rotationEffect(.degrees(index == currentIndex ? Double(offset.width / 10) : 0))
                         .shadow(color: Color.black.opacity(index == currentIndex ? 0.1 : 0), radius: 20, x: 0, y: 0)
@@ -108,9 +109,12 @@ struct ContentView: View {
                                             }
 
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                                currentIndex += 1
-                                                if currentIndex == shuffledCards.count {
+                                                updateCurrentCards()
+                                                if currentIndex == currentCards.count {
                                                     currentIndex = 0
+                                                }
+                                                if shuffleIndex == shuffledCards.count {
+                                                    shuffleIndex = 0
                                                     shuffledCards = cardViewModel.cards.shuffled()
                                                 }
                                                 offset = .zero
@@ -138,9 +142,15 @@ struct ContentView: View {
             }
             .onChange(of: cardViewModel.cards) { newCards in // Add this block
                 shuffledCards = newCards.shuffled()
+                currentCards = Array(shuffledCards[0..<3])
             }
             .padding()
         }
+    private func updateCurrentCards() {
+        currentIndex += 1
+        shuffleIndex += 1
+        currentCards.append(shuffledCards[shuffleIndex+2])
+    }
 }
 
 struct CardView: View {
