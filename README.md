@@ -1,3 +1,4 @@
 # Cards
 An easy and convenient way to prepare for anything
-![f43t](https://github.com/artyaz/Cards/assets/126274993/fd2de290-ea62-4c6f-9546-78235f756c2e)
+
+![j656j](https://github.com/artyaz/Cards/assets/126274993/6b7bd85d-6573-4d0c-acde-1f0bb533f442)
