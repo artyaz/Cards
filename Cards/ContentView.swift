@@ -65,7 +65,7 @@ struct CodeView: View {
 
     var body: some View {
         Text(code)
-            .font(.system(size: 10, design: .monospaced))
+            .font(.system(size: 10, design: .monospaced)).fontWeight(Font.Weight.regular)
             .padding()
             .background(Color.gray.opacity(0.1))
             .cornerRadius(10)
@@ -126,7 +126,7 @@ struct ContentView: View {
                                 }
                         )
                         .onTapGesture {
-                            withAnimation(.spring(response: 0.8, dampingFraction: 0.5, blendDuration: 0)) {
+                            withAnimation(.spring(response: 0.8, dampingFraction: 0.2, blendDuration: 0)) {
                                 if flippedCardIndices.contains(index) {
                                     flippedCardIndices.remove(index)
                                 } else {
@@ -157,18 +157,18 @@ struct CardView: View {
     let card: Card
     let isFlipped: Bool
     let swipeProgress: CGFloat
-
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25)
                 .fill(Color.white)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-
+            
             if isFlipped {
                 ScrollView {
                     parseText(card.text)
-                        .font(.system(size: 25))
-                        .padding()
+                        .font(.system(size: 20)).fontWeight(Font.Weight.medium).lineSpacing(3)
+                        .padding(EdgeInsets(top: 30, leading: 20, bottom: 20, trailing: 20))
                 }
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0)) // Fix mirrored text
             } else {
@@ -184,7 +184,8 @@ struct CardView: View {
     func parseText(_ text: String) -> some View {
         let imgPattern = "\\[img\\](.*?)\\[/img\\]"
         let codePattern = "\\[code\\]([\\s\\S]*?)\\[/code\\]"
-        let combinedPattern = "(?:\(imgPattern)|\(codePattern))"
+        let highlightPattern = "\\[highlight\\](.*?)\\[/highlight\\]"
+        let combinedPattern = "(?:\(imgPattern)|\(codePattern)|\(highlightPattern))"
         
         let regex = try? NSRegularExpression(pattern: combinedPattern, options: [])
         let nsText = text as NSString
@@ -197,6 +198,7 @@ struct CardView: View {
             let range = match.range
             let imgRange = match.range(at: 1)
             let codeRange = match.range(at: 2)
+            let highlightRange = match.range(at: 3)
             
             if range.location > lastIndex {
                 let textRange = NSRange(location: lastIndex, length: range.location - lastIndex)
@@ -214,6 +216,16 @@ struct CardView: View {
                     .replacingOccurrences(of: "[code]", with: "")
                     .replacingOccurrences(of: "[/code]", with: "")
                 parsedViews.append(AnyView(CodeView(code: code)))
+            } else if highlightRange.length > 0 {
+                let highlightedText = nsText.substring(with: highlightRange)
+                    .replacingOccurrences(of: "[highlight]", with: "")
+                    .replacingOccurrences(of: "[/highlight]", with: "")
+                parsedViews.append(AnyView(
+                    Text(highlightedText)
+                        .font(.system(.body, design: .monospaced))
+                        .padding(4)
+                        .background(RoundedRectangle(cornerRadius: 8).fill(Color.yellow.opacity(0.5)))
+                ))
             }
             
             lastIndex = range.location + range.length
