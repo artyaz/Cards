@@ -4,6 +4,8 @@ import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+var ContentViewId = "csh-interview#k7tt"
+
 struct Card: Identifiable, Codable, Equatable {
     @DocumentID var id: String?
     let title: String
@@ -15,26 +17,35 @@ class CardViewModel: ObservableObject {
 
     private var db = Firestore.firestore()
 
-    func fetchData() {
-        db.collection("cards").limit(to: 1).getDocuments() { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let result = Result {
-                        try document.data(as: CardSet.self)
-                    }
-                    switch result {
-                    case .success(let cardSet):
-                        self.cards = cardSet.cardSets.map { Card(title: $0["0"] ?? "", text: $0["1"] ?? "") } // Update this line
-                        print(self.cards)
-                    case .failure(let error):
-                        print("Error decoding card set: \(error)")
+    func fetchData(by id: String) {
+        db.collection("cards").getDocuments(){ (querySnapshot, error) in
+            print(print("Documents: \(querySnapshot!.documents)"))
+            for document in querySnapshot!.documents {
+                print(document.data())
+            }
+        }
+        db.collection("cards").whereField("id", isEqualTo: id)
+            .getDocuments() { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                } else {
+                    print("Documents: \(querySnapshot!.documents.count)")
+                    for document in querySnapshot!.documents {
+                        let result = Result {
+                            try document.data(as: CardSet.self)
+                        }
+                        switch result {
+                        case .success(let cardSet):
+                            self.cards = cardSet.cardSets.map { Card(title: $0["0"] ?? "", text: $0["1"] ?? "") }
+                            print(self.cards)
+                        case .failure(let error):
+                            print("Error decoding card set: \(error)")
+                        }
                     }
                 }
             }
-        }
     }
+
 }
 
 struct CardSet: Codable {
@@ -138,7 +149,7 @@ struct ContentView: View {
             }
         }
             .onAppear {
-                cardViewModel.fetchData()
+                cardViewModel.fetchData(by: ContentViewId )
             }
             .onChange(of: cardViewModel.cards) { newCards in // Add this block
                 shuffledCards = newCards.shuffled()
