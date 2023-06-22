@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B131A6CA2A4478490076F953 /* CardSetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B131A6C92A4478490076F953 /* CardSetList.swift */; };
 		B15875E12A3B414600FB29AC /* CardsHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15875E02A3B414600FB29AC /* CardsHub.swift */; };
 		B15BE5122A3372A800FE22FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B15BE5112A3372A800FE22FF /* GoogleService-Info.plist */; };
 		B189E79B2A30A55800AB931F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B189E79A2A30A55800AB931F /* SDWebImageSwiftUI */; };
@@ -19,6 +20,7 @@
 		B189E7AA2A30AFA200AB931F /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = B189E7A92A30AFA200AB931F /* FirebaseInAppMessaging-Beta */; };
 		B189E7AC2A30AFA200AB931F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = B189E7AB2A30AFA200AB931F /* FirebaseMessaging */; };
 		B189E7AE2A30AFA200AB931F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B189E7AD2A30AFA200AB931F /* FirebaseStorage */; };
+		B1ACD1052A44A79900A0A535 /* AICardsCreationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */; };
 		B1CD54992A30424700C43013 /* CardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD54982A30424700C43013 /* CardsApp.swift */; };
 		B1CD549B2A30424700C43013 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD549A2A30424700C43013 /* ContentView.swift */; };
 		B1CD549D2A30424800C43013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1CD549C2A30424800C43013 /* Assets.xcassets */; };
@@ -26,8 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B131A6C92A4478490076F953 /* CardSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSetList.swift; sourceTree = "<group>"; };
 		B15875E02A3B414600FB29AC /* CardsHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsHub.swift; sourceTree = "<group>"; };
 		B15BE5112A3372A800FE22FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICardsCreationScreen.swift; sourceTree = "<group>"; };
 		B1CD54952A30424700C43013 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CD54982A30424700C43013 /* CardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsApp.swift; sourceTree = "<group>"; };
 		B1CD549A2A30424700C43013 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 				B15875E02A3B414600FB29AC /* CardsHub.swift */,
 				B1CD549C2A30424800C43013 /* Assets.xcassets */,
 				B1CD549E2A30424800C43013 /* Preview Content */,
+				B131A6C92A4478490076F953 /* CardSetList.swift */,
+				B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -182,6 +188,8 @@
 			files = (
 				B1CD549B2A30424700C43013 /* ContentView.swift in Sources */,
 				B15875E12A3B414600FB29AC /* CardsHub.swift in Sources */,
+				B131A6CA2A4478490076F953 /* CardSetList.swift in Sources */,
+				B1ACD1052A44A79900A0A535 /* AICardsCreationScreen.swift in Sources */,
 				B1CD54992A30424700C43013 /* CardsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
