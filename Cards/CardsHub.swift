@@ -10,6 +10,34 @@ import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+class apiCalls{
+    func generateCardSet(name: String, qc: Int){
+        let url = URL(string: "https://cards-backend-python-91217e25d432.herokuapp.com/generate")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let parameters: [String: Any] = [
+            "name": name,
+            "questions_count": qc
+        ]
+
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+            } else if let data = data {
+                let str = String(data: data, encoding: .utf8)
+                print("Received data:\n\(str ?? "")")
+            }
+        }
+
+        task.resume()
+
+    }
+}
+
 class CardsViewModel: ObservableObject {
     @Published var cards = [CardListItem]()
     
@@ -20,7 +48,8 @@ class CardsViewModel: ObservableObject {
     }
     
     func fetchData() {
-        db.collection("cards").limit(to: 20).addSnapshotListener { (querySnapshot, error) in
+        db.collection("cards").limit(to: 20).addSnapshotListener
+        { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -67,6 +96,7 @@ struct CardItem: View {
                         
                         Text(title)
                             .font(.system(size: 24, weight: .bold, design: .default))
+                            .foregroundColor(.primary)
                         
                         Spacer()
                     }
@@ -90,26 +120,86 @@ struct CardItem: View {
 
 struct CardsHub: View {
     @StateObject private var cardsViewModel = CardsViewModel()
+    @State private var showActions = false
     
     var body: some View {
-        ScrollView {
-            HStack() {
-                Text("Featured")
-                    .fontWeight(.semibold)
-                    .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                    .font(.system(size: 40))
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            LazyVStack {
-                ForEach(cardsViewModel.cards) { card in
-                    CardItem(icon: "multiply.circle.fill", title: card.name, id: card.id, description: "test")
+        ZStack {
+            NavigationView {
+                ScrollView {
+                    HStack() {
+                        Text("Featured")
+                            .fontWeight(.semibold)
+                            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                            .font(.system(size: 40))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    LazyVStack {
+                        ForEach(cardsViewModel.cards) { card in
+                            NavigationLink(destination: ContentView(ContentViewId: card.id)) {
+                                CardItem(icon: "curlybraces.square", title: card.name, id: card.id, description: "test")
+                            }
+                        }
+                    }
                 }
             }
-        }
+            if showActions {
+                    Color.white.opacity(0.8).ignoresSafeArea().blur(radius: 2)
+                        .onTapGesture {
+                            withAnimation {
+                                showActions = false
+                            }
+                        }
+                    VStack {
+                                Button(action: {
+                                    // Action 1
+                                }) {
+                                    Text("🖋️").font(Font.system(size: 40))
+                                    Text("Create Card Set")
+                                        .fontWeight(.bold)
+                                        .font(Font.system(size: 25))
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(.black) // Text color
+                                }
+                                .scaleEffect(showActions ? 1 : 0)
+                                .animation(Animation.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0.5))
+
+                                Button(action: {
+                                    withAnimation {
+                                        self.showActions.toggle()
+                                    }
+                                }) {
+                                    Text("🦄").font(Font.system(size: 40))
+                                    Text("Create with AI")
+                                        .fontWeight(.bold)
+                                        .font(Font.system(size: 25))
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(.black) // Text color
+                                }
+                                .scaleEffect(showActions ? 1 : 0)
+                                .animation(Animation.spring(response: 0.49, dampingFraction: 0.29, blendDuration: 0.49))
+                            }
+                            .transition(.move(edge: .bottom)) // Add this line
+                        }
+
+
+            Button(action: {
+                    withAnimation() { // Modify this line
+                        showActions.toggle()
+                    }
+                }) {
+                Image(systemName: "plus")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.black.opacity(0.1))
+                    .cornerRadius(40)
+                    .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 5)
+                }
+                    .padding()
+                    .position(x: 50, y: UIScreen.main.bounds.height - 110) // Position bottom left
+                }
     }
-
 }
-
 struct CardsHub_Previews: PreviewProvider {
     static var previews: some View {
         CardsHub()

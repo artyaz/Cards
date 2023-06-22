@@ -4,8 +4,6 @@ import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-var ContentViewId = "csh-interview#k7tt"
-
 struct Card: Identifiable, Codable, Equatable {
     @DocumentID var id: String?
     let title: String
@@ -18,12 +16,6 @@ class CardViewModel: ObservableObject {
     private var db = Firestore.firestore()
 
     func fetchData(by id: String) {
-        db.collection("cards").getDocuments(){ (querySnapshot, error) in
-            print(print("Documents: \(querySnapshot!.documents)"))
-            for document in querySnapshot!.documents {
-                print(document.data())
-            }
-        }
         db.collection("cards").whereField("id", isEqualTo: id)
             .getDocuments() { (querySnapshot, error) in
                 if let error = error {
@@ -43,7 +35,7 @@ class CardViewModel: ObservableObject {
                         }
                     }
                 }
-            }
+        }
     }
 
 }
@@ -84,6 +76,7 @@ struct CodeView: View {
 }
 struct ContentView: View {
     @StateObject var cardViewModel = CardViewModel()
+    var ContentViewId: String
     
     @State private var currentIndex = 0
     @State private var shuffleIndex = 2
@@ -253,10 +246,5 @@ struct CardView: View {
                 parsedViews[index]
             }
         })
-    }
-}
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
