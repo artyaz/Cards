@@ -154,7 +154,6 @@ struct CardItem: View {
 struct CardSetList: View {
     @StateObject private var cardsViewModel = CardsViewModel()
     var body: some View {
-        NavigationView {
             ScrollView {
                 HStack {
                     Text("Featured")
@@ -171,7 +170,6 @@ struct CardSetList: View {
                     }
                 }
             }
-        }
     }
 }
 

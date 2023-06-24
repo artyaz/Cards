@@ -12,7 +12,6 @@
 		B142294A2A46F777007A78B3 /* WrapLayout in Frameworks */ = {isa = PBXBuildFile; productRef = B14229492A46F777007A78B3 /* WrapLayout */; };
 		B147D4B62A45F2D200F5B704 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = B147D4B52A45F2D200F5B704 /* WrappingHStack */; };
 		B15875E12A3B414600FB29AC /* CardsHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15875E02A3B414600FB29AC /* CardsHub.swift */; };
-		B15BE5122A3372A800FE22FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B15BE5112A3372A800FE22FF /* GoogleService-Info.plist */; };
 		B189E79B2A30A55800AB931F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B189E79A2A30A55800AB931F /* SDWebImageSwiftUI */; };
 		B189E79E2A30AFA200AB931F /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = B189E79D2A30AFA200AB931F /* FirebaseAppCheck */; };
 		B189E7A02A30AFA200AB931F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B189E79F2A30AFA200AB931F /* FirebaseDatabase */; };
@@ -24,6 +23,8 @@
 		B189E7AC2A30AFA200AB931F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = B189E7AB2A30AFA200AB931F /* FirebaseMessaging */; };
 		B189E7AE2A30AFA200AB931F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B189E7AD2A30AFA200AB931F /* FirebaseStorage */; };
 		B1ACD1052A44A79900A0A535 /* AICardsCreationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */; };
+		B1C13FAC2A4781BA006A8111 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1C13FAB2A4781BA006A8111 /* GoogleService-Info.plist */; };
+		B1C13FAE2A4787C7006A8111 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C13FAD2A4787C7006A8111 /* FloatingButton.swift */; };
 		B1CD54992A30424700C43013 /* CardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD54982A30424700C43013 /* CardsApp.swift */; };
 		B1CD549B2A30424700C43013 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CD549A2A30424700C43013 /* ContentView.swift */; };
 		B1CD549D2A30424800C43013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1CD549C2A30424800C43013 /* Assets.xcassets */; };
@@ -34,8 +35,9 @@
 		B1119F492A46FF2500C90D91 /* TagItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagItem.swift; sourceTree = "<group>"; };
 		B131A6C92A4478490076F953 /* CardSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSetList.swift; sourceTree = "<group>"; };
 		B15875E02A3B414600FB29AC /* CardsHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsHub.swift; sourceTree = "<group>"; };
-		B15BE5112A3372A800FE22FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICardsCreationScreen.swift; sourceTree = "<group>"; };
+		B1C13FAB2A4781BA006A8111 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B1C13FAD2A4787C7006A8111 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		B1CD54952A30424700C43013 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1CD54982A30424700C43013 /* CardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsApp.swift; sourceTree = "<group>"; };
 		B1CD549A2A30424700C43013 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,15 +87,16 @@
 		B1CD54972A30424700C43013 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
-				B15BE5112A3372A800FE22FF /* GoogleService-Info.plist */,
+				B1C13FAB2A4781BA006A8111 /* GoogleService-Info.plist */,
 				B1CD54982A30424700C43013 /* CardsApp.swift */,
+				B1119F492A46FF2500C90D91 /* TagItem.swift */,
 				B1CD549A2A30424700C43013 /* ContentView.swift */,
+				B131A6C92A4478490076F953 /* CardSetList.swift */,
+				B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */,
+				B1C13FAD2A4787C7006A8111 /* FloatingButton.swift */,
 				B15875E02A3B414600FB29AC /* CardsHub.swift */,
 				B1CD549C2A30424800C43013 /* Assets.xcassets */,
 				B1CD549E2A30424800C43013 /* Preview Content */,
-				B131A6C92A4478490076F953 /* CardSetList.swift */,
-				B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */,
-				B1119F492A46FF2500C90D91 /* TagItem.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -184,9 +187,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B15BE5122A3372A800FE22FF /* GoogleService-Info.plist in Resources */,
 				B1CD54A02A30424800C43013 /* Preview Assets.xcassets in Resources */,
 				B1CD549D2A30424800C43013 /* Assets.xcassets in Resources */,
+				B1C13FAC2A4781BA006A8111 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +202,7 @@
 			files = (
 				B1CD549B2A30424700C43013 /* ContentView.swift in Sources */,
 				B15875E12A3B414600FB29AC /* CardsHub.swift in Sources */,
+				B1C13FAE2A4787C7006A8111 /* FloatingButton.swift in Sources */,
 				B131A6CA2A4478490076F953 /* CardSetList.swift in Sources */,
 				B1ACD1052A44A79900A0A535 /* AICardsCreationScreen.swift in Sources */,
 				B1CD54992A30424700C43013 /* CardsApp.swift in Sources */,
@@ -344,7 +348,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.Cards";
+				PRODUCT_BUNDLE_IDENTIFIER = com.artyaz.Cards;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
