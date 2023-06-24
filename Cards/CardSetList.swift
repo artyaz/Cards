@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WrapLayout
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -75,45 +76,72 @@ struct CardListItem: Identifiable, Codable {
     var tags: [String]
 }
 
+struct Constants {
+    static let primaryBlue: Color = Color(red: 0.29, green: 0.57, blue: 1).opacity(0.3)
+    static let primaryDarkBlue: Color = Color(red: 0.16, green: 0.39, blue: 0.74)
+    static let primaryWhite: Color = .white
+    static let primaryBlack: Color = .black
+}
+
 struct CardItem: View {
     var icon: String
     var title: String
     var id: String
     var description: String
+    var tags: [String]
     
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .fill(Color.white)
-            .frame(width: 400, height: 150)
-            .shadow(color: Color.black, radius: 1, x: 0, y: 0)
-            .padding(.top, 10.0)
-            .overlay(
-                VStack(alignment: .leading) {
-                    HStack {
-                        Image(systemName: icon)
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.gray)
-                        
-                        Text(title)
-                            .font(.system(size: 24, weight: .bold, design: .default))
-                            .foregroundColor(.primary)
-                        
-                        Spacer()
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .center, spacing: 10) {
+                    HStack(alignment: .top, spacing: 10) {
+                        Image("cursor-arrow-rays-white")
+                          .frame(width: 24, height: 24)
                     }
+                    .padding(5)
+                    .background(.black)
+                    .cornerRadius(10)
                     
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(id)
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
-                        
-                        Text(description)
-                            .font(.system(size: 14))
-                            .foregroundColor(.black)
+                    Text(title)
+                      .font(
+                        Font.system(size: 24)
+                          .weight(.medium)
+                      )
+                      .foregroundColor(.black)
+                }
+                .padding(0)
+                
+                Text(description)
+                  .font(Font.system(size: 13))
+                  .foregroundColor(.black)
+                  .multilineTextAlignment(.leading)
+                  .frame(maxWidth: .infinity, minHeight: 15, maxHeight: 32, alignment: .topLeading)
+                
+                Text(id)
+                  .font(
+                    Font.system(size: 13)
+                      .weight(.medium)
+                  )
+                  .foregroundColor(.black.opacity(0.51))
+                Divider()
+                
+                WrapLayout{
+                    ForEach(tags, id: \.self) { tag in
+                        TagItem(text: tag, selectable: false)
                     }
                 }
-                .padding()
+                
+                
+            }
+            .padding(20)
+            .frame(width: 380, alignment: .topLeading)
+            .background(.white)
+            .cornerRadius(23)
+            .shadow(color: .black.opacity(0.09), radius: 4.5, x: 0, y: 2)
+            .overlay(
+            RoundedRectangle(cornerRadius: 23)
+            .inset(by: 0.5)
+            .stroke(.black, lineWidth: 1)
             )
     }
 }
@@ -125,17 +153,17 @@ struct CardSetList: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                HStack() {
+                HStack {
                     Text("Featured")
                         .fontWeight(.semibold)
                         .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                         .font(.system(size: 40))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                LazyVStack {
+                LazyVStack(spacing: 20) {
                     ForEach(cardsViewModel.cards) { card in
                         NavigationLink(destination: ContentView(ContentViewId: card.id)) {
-                            CardItem(icon: "curlybraces.square", title: card.name, id: card.id, description: "test")
+                            CardItem(icon: "curlybraces.square", title: card.name, id: card.id, description: "test", tags: card.tags)
                         }
                     }
                 }

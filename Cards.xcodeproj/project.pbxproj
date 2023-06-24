@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B1119F4A2A46FF2500C90D91 /* TagItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1119F492A46FF2500C90D91 /* TagItem.swift */; };
 		B131A6CA2A4478490076F953 /* CardSetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B131A6C92A4478490076F953 /* CardSetList.swift */; };
+		B142294A2A46F777007A78B3 /* WrapLayout in Frameworks */ = {isa = PBXBuildFile; productRef = B14229492A46F777007A78B3 /* WrapLayout */; };
+		B147D4B62A45F2D200F5B704 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = B147D4B52A45F2D200F5B704 /* WrappingHStack */; };
 		B15875E12A3B414600FB29AC /* CardsHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15875E02A3B414600FB29AC /* CardsHub.swift */; };
 		B15BE5122A3372A800FE22FF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B15BE5112A3372A800FE22FF /* GoogleService-Info.plist */; };
 		B189E79B2A30A55800AB931F /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B189E79A2A30A55800AB931F /* SDWebImageSwiftUI */; };
@@ -28,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B1119F492A46FF2500C90D91 /* TagItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagItem.swift; sourceTree = "<group>"; };
 		B131A6C92A4478490076F953 /* CardSetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSetList.swift; sourceTree = "<group>"; };
 		B15875E02A3B414600FB29AC /* CardsHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsHub.swift; sourceTree = "<group>"; };
 		B15BE5112A3372A800FE22FF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -49,10 +53,12 @@
 				B189E7A82A30AFA200AB931F /* FirebaseFunctions in Frameworks */,
 				B189E7AE2A30AFA200AB931F /* FirebaseStorage in Frameworks */,
 				B189E7A02A30AFA200AB931F /* FirebaseDatabase in Frameworks */,
+				B147D4B62A45F2D200F5B704 /* WrappingHStack in Frameworks */,
 				B189E7AA2A30AFA200AB931F /* FirebaseInAppMessaging-Beta in Frameworks */,
 				B189E79E2A30AFA200AB931F /* FirebaseAppCheck in Frameworks */,
 				B189E7A42A30AFA200AB931F /* FirebaseFirestore in Frameworks */,
 				B189E79B2A30A55800AB931F /* SDWebImageSwiftUI in Frameworks */,
+				B142294A2A46F777007A78B3 /* WrapLayout in Frameworks */,
 				B189E7A62A30AFA200AB931F /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +93,7 @@
 				B1CD549E2A30424800C43013 /* Preview Content */,
 				B131A6C92A4478490076F953 /* CardSetList.swift */,
 				B1ACD1042A44A79900A0A535 /* AICardsCreationScreen.swift */,
+				B1119F492A46FF2500C90D91 /* TagItem.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -126,6 +133,8 @@
 				B189E7A92A30AFA200AB931F /* FirebaseInAppMessaging-Beta */,
 				B189E7AB2A30AFA200AB931F /* FirebaseMessaging */,
 				B189E7AD2A30AFA200AB931F /* FirebaseStorage */,
+				B147D4B52A45F2D200F5B704 /* WrappingHStack */,
+				B14229492A46F777007A78B3 /* WrapLayout */,
 			);
 			productName = Cards;
 			productReference = B1CD54952A30424700C43013 /* Cards.app */;
@@ -158,6 +167,8 @@
 			packageReferences = (
 				B189E7992A30A55800AB931F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				B189E79C2A30AFA200AB931F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B147D4B42A45F2D200F5B704 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				B14229482A46F777007A78B3 /* XCRemoteSwiftPackageReference "swiftui-WrapLayout" */,
 			);
 			productRefGroup = B1CD54962A30424700C43013 /* Products */;
 			projectDirPath = "";
@@ -191,6 +202,7 @@
 				B131A6CA2A4478490076F953 /* CardSetList.swift in Sources */,
 				B1ACD1052A44A79900A0A535 /* AICardsCreationScreen.swift in Sources */,
 				B1CD54992A30424700C43013 /* CardsApp.swift in Sources */,
+				B1119F4A2A46FF2500C90D91 /* TagItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +405,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B14229482A46F777007A78B3 /* XCRemoteSwiftPackageReference "swiftui-WrapLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/FluidGroup/swiftui-WrapLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
+		B147D4B42A45F2D200F5B704 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		B189E7992A30A55800AB931F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -412,6 +440,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B14229492A46F777007A78B3 /* WrapLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B14229482A46F777007A78B3 /* XCRemoteSwiftPackageReference "swiftui-WrapLayout" */;
+			productName = WrapLayout;
+		};
+		B147D4B52A45F2D200F5B704 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B147D4B42A45F2D200F5B704 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
 		B189E79A2A30A55800AB931F /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B189E7992A30A55800AB931F /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
