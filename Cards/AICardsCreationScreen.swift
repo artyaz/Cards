@@ -18,7 +18,7 @@ struct AICardsCreationScreen: View {
         VStack(alignment: .center, spacing: 41) {
             HStack(alignment: .center, spacing: 10) {
                 HStack(alignment: .top, spacing: 10) {
-                    Image("sparkles")
+                    Image("sparkles-blue")
                       .frame(width: 24, height: 24)
                 }
                 .padding(5)
@@ -32,7 +32,7 @@ struct AICardsCreationScreen: View {
                 
                 Text("Create with AI")
                   .font(
-                    Font.system(size: 32)
+                    Font.system(size: 40)
                       .weight(.semibold)
                   )
                   .foregroundColor(.black)
@@ -43,7 +43,7 @@ struct AICardsCreationScreen: View {
             Divider()
                 VStack(alignment: .center, spacing: 26) {
                     //text input
-                    TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $textField1)
+                    TextField("Name", text: $textField1)
                     .padding(10)
                     .frame(width: 340, height: 47, alignment: .leading)
                     .cornerRadius(10)
@@ -53,7 +53,7 @@ struct AICardsCreationScreen: View {
                         .stroke(.black, lineWidth: 1)
                     )
                     
-                    TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $textField2)
+                    TextField("Description", text: $textField2)
                     .padding(15)
                     .frame(width: 340, height: 131, alignment: .topLeading)
                     .cornerRadius(10)
@@ -94,7 +94,7 @@ struct AICardsCreationScreen: View {
                     .background(Color(red: 0.96, green: 0.96, blue: 0.96))
                     .cornerRadius(10)
                     .overlay(
-                      RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .inset(by: 0.5)
                         .stroke(.black, lineWidth: 1)
                     )
@@ -102,9 +102,11 @@ struct AICardsCreationScreen: View {
                 }
                 .padding(0)
             
+            Divider()
+            
             VStack(alignment: .leading, spacing: 10) {
                 Button("Create") {
-                    
+                    apiCalls().generateCardSet(name: textField1, qc: 4, tags: selectedTags, description: textField2)
                 }
                 .padding(.horizontal, 107)
                 .padding(.vertical, 10)

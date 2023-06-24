@@ -12,7 +12,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class apiCalls{
-    func generateCardSet(name: String, qc: Int){
+    func generateCardSet(name: String, qc: Int, tags: [String], description: String){
         let url = URL(string: "https://cards-backend-python-91217e25d432.herokuapp.com/generate")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -20,7 +20,9 @@ class apiCalls{
 
         let parameters: [String: Any] = [
             "name": name,
-            "questions_count": qc
+            "questions_count": qc,
+            "tags": tags,
+            "description": description
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
@@ -73,6 +75,7 @@ struct CardListItem: Identifiable, Codable {
     var cardSets: [[String: String]]
     var name: String
     var ownerID: String
+    var description: String
     var tags: [String]
 }
 
@@ -163,7 +166,7 @@ struct CardSetList: View {
                 LazyVStack(spacing: 20) {
                     ForEach(cardsViewModel.cards) { card in
                         NavigationLink(destination: ContentView(ContentViewId: card.id)) {
-                            CardItem(icon: "curlybraces.square", title: card.name, id: card.id, description: "test", tags: card.tags)
+                            CardItem(icon: "curlybraces.square", title: card.name, id: card.id, description: card.description, tags: card.tags)
                         }
                     }
                 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct CardsHub: View {
     @State private var showActions = false
     @State private var isTapped = true
+    @State private var shouldRotate = false
     @State private var shouldShowAICardsCreationScreen = false
     
     var body: some View {
@@ -17,15 +18,17 @@ struct CardsHub: View {
             CardSetList()
             if showActions {
                 Color.white
-                    .opacity(showActions ? 0.8 : 0)
+                    .offset(y: isTapped ? 200 : 0)
+                    .opacity(isTapped ? 0 : 1)
+                    .animation(.easeOut(duration: 0.1))
+                    .scaleEffect(showActions ? 1 : 0)
+                    .animation(Animation.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0.5))
                     .ignoresSafeArea()
-                    .blur(radius: 2)
-                    //.animation(.easeOut)
                     .onTapGesture {
                             let generator = UIImpactFeedbackGenerator(style: .rigid)
                                     generator.impactOccurred()
                             self.isTapped.toggle()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 withAnimation{
                                     self.showActions.toggle()
                                 }
@@ -49,7 +52,7 @@ struct CardsHub: View {
                                         })
                                 .offset(y: isTapped ? 200 : 0)
                                 .opacity(isTapped ? 0 : 1)
-                                .animation(.easeOut(duration: 0.2))
+                                .animation(.easeOut(duration: 0.1))
                                 .scaleEffect(showActions ? 1 : 0)
                                 .animation(Animation.spring(response: 0.5, dampingFraction: 0.3, blendDuration: 0.5))
 
@@ -70,7 +73,7 @@ struct CardsHub: View {
                                 }
                                 .offset(y: isTapped ? 200 : 0)
                                 .opacity(isTapped ? 0 : 1)
-                                .animation(.easeOut(duration: 0.2))
+                                .animation(.easeOut(duration: 0.1))
                                 .scaleEffect(showActions ? 1 : 0)
                                 .animation(Animation.spring(response: 0.49, dampingFraction: 0.29, blendDuration: 0.49))
                             }
@@ -80,19 +83,40 @@ struct CardsHub: View {
             Button(action: {
                 let generator = UIImpactFeedbackGenerator(style: .rigid)
                         generator.impactOccurred()
+                
+                if showActions == false {
                     withAnimation() { // Modify this line
                         showActions.toggle()
                         isTapped.toggle()
+                        shouldRotate.toggle()
                     }
+                } else {
+                    isTapped.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation{
+                            showActions.toggle()
+                            shouldRotate.toggle()
+                        }
+                    }
+                }
+                
+                    
                 
                 }) {
                 Image(systemName: "plus")
                     .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .padding()
-                    .background(Color.black.opacity(0.1))
+                    .background(.white)
                     .cornerRadius(40)
-                    .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 5)
+                    .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .inset(by: 0.5)
+                            .stroke(.black, lineWidth: 1)
+                    )
+                    .rotationEffect(Angle(degrees: shouldRotate ? 45 : 0))
+                    .animation(Animation.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0.5), value: shouldRotate)
                 }
                     .padding()
                     .position(x: 50, y: UIScreen.main.bounds.height - 110) // Position bottom left

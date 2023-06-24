@@ -26,7 +26,8 @@ struct TagItem: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 5) {
-            Image(tagDict[text]!)
+            var image = tagDict[text] ?? "cube"
+            Image(isSelected ? image + "-blue" : tagDict[text] ?? "cube")
               .frame(width: 18, height: 18)
             
             Text(text)
@@ -34,7 +35,7 @@ struct TagItem: View {
                 Font.system(size: 12)
                   .weight(.medium)
               )
-              .foregroundColor(isSelected ?Color(red: 0.16, green: 0.39, blue: 0.74) : Color.black)
+              .foregroundColor(isSelected ? Color(red: 0.16, green: 0.39, blue: 0.74) : Color.black)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 5)
