@@ -85,7 +85,6 @@ struct ContentView: View {
     @State private var currentCards: [Card] = []
     @State private var flippedCardIndices: Set<Int> = []
     var body: some View {
-        
         ZStack {
             ForEach(currentCards.indices.reversed(), id: \.self) { index in
                 if index >= currentIndex {

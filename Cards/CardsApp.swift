@@ -9,8 +9,10 @@ import SwiftUI
 import Firebase
 
 @main
+
 struct CardsApp: App {
     init() {
+        Data().loadDefaults()
         FirebaseApp.configure()
     }
     var body: some Scene {
